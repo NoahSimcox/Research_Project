@@ -1,3 +1,5 @@
+import graphics.graphics.Line;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -94,7 +96,18 @@ class Main {
 
             sum += library.get(num).size();
         }
-        System.out.println(" Total possibilities = "+ (sum + initialSeq.size()));
+        System.out.println(" Total possibilities = "+ (1 + sum + initialSeq.size()));
 
+
+        Line line = new Line(1, 1, 100, 100);
+        line.draw();
+
+
+
+        System.out.println("Enter the number of the pair possibility:");
+        int lattice = scan.nextInt();
+
+//        if (lattice <= initialSeq.size()-1)
+//            Display display = new Display(initialSeq.get(lattice));
     }
 }
