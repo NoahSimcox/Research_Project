@@ -22,6 +22,8 @@ public class Display {
 
         seqArray = new ArrayList<>();
 
+        lineArray = new ArrayList<>();
+
         for (int i = 0; i < seq.size(); i++){
 
             if (pair.get_nucleotide_north().index == i)
