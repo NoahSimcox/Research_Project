@@ -26,9 +26,9 @@ public class Display {
 
         for (int i = 0; i < seq.size(); i++){
 
-            if (pair.get_nucleotide_north().index == i)
+            if (pair.get_nucleotide_north() != null && pair.get_nucleotide_north().index == i)
                 seqArray.add("n");
-            else if (pair.get_nucleotide_south().index == i)
+            else if (pair.get_nucleotide_south() != null && pair.get_nucleotide_south().index == i)
                 seqArray.add("s");
             else
                 seqArray.add(null);
@@ -37,10 +37,11 @@ public class Display {
 
         for (int j = 0; j < seqArray.size(); j++){
 
-            if (seqArray.get(0) == null) {
+            if (j == 0 && seqArray.get(0) == null) {
+
                 line = new Line(startX, startY, endX += (startX + 100), endY += startY);
                 lineArray.add(line);
-            } else{
+            } else if (j == 0 && seqArray.get(0).equals("n")){
 
                 line = new Line(startX, startY, endX += startX, endY += (startY - 100));
                 lineArray.add(line);
@@ -70,26 +71,29 @@ public class Display {
 
         seqArray = new ArrayList<>();
 
+        lineArray = new ArrayList<>();
+
+        for (int l = 0; l < seq.size(); l++){
+
+            seqArray.add(null);
+        }
+
         for (int i = 0; i < seq.size(); i++) {
             for (int j = 0; j < pairArray.size(); j++) {
 
                 if (pairArray.get(j).get_nucleotide_north().index == i)
-                    seqArray.add("n");
+                    seqArray.set(i, "n");
                 else if (pairArray.get(j).get_nucleotide_south().index == i)
-                    seqArray.add("s");
-
+                    seqArray.set(i, "s");
             }
-
-            if (!(seqArray.get(i).equals("n") || seqArray.get(i).equals("s")))
-                seqArray.add(null);
         }
 
         for (int k = 0; k < seqArray.size(); k++){
 
-            if (seqArray.get(0) == null) {
+            if (k == 0 && seqArray.get(0) == null) {
                 line = new Line(startX, startY, endX += (startX + 100), endY += startY);
                 lineArray.add(line);
-            } else{
+            } else if (k == 0 && seqArray.get(0).equals("n")){
 
                 line = new Line(startX, startY, endX += startX, endY += (startY - 100));
                 lineArray.add(line);

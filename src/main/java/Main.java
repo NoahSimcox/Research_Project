@@ -1,3 +1,4 @@
+import graphics.graphics.Color;
 import graphics.graphics.Line;
 
 import java.util.Scanner;
@@ -108,31 +109,82 @@ class Main {
 
         Display display;
 
-        if (lattice <= initialSeq.size()) {
+        if (lattice == 0){
+
+            boolean green = true;
+
+            display = new Display(new Pair(null, null), RNA);
+
+            for (int h = 0; h < display.getLineArray().size(); h++) {
+
+                if (green) {
+                    display.getLineArray().get(h).setColor(new Color(0, 255, 0));
+                    display.getLineArray().get(h).draw();
+
+                    green = false;
+                }
+                else{
+                    display.getLineArray().get(h).setColor(new Color(255, 0, 0));
+                    display.getLineArray().get(h).draw();
+
+                    green = true;
+                }
+            }
+
+        }
+
+
+        if (lattice <= initialSeq.size() && lattice > 0) {
+
+            boolean green = true;
 
             display = new Display(initialSeq.get(lattice - 1), RNA);
 
             for (int h = 0; h < display.getLineArray().size(); h++) {
 
-                display.getLineArray().get(h).draw();
+                if (green) {
+                    display.getLineArray().get(h).setColor(new Color(0, 255, 0));
+                    display.getLineArray().get(h).draw();
+
+                    green = false;
+                }
+                else{
+                    display.getLineArray().get(h).setColor(new Color(255, 0, 0));
+                    display.getLineArray().get(h).draw();
+
+                    green = true;
+                }
             }
         }
 
 
         else {
 
-            int pairCount = 0;
+            int pairCount = 1;
+            boolean green = true;
 
         search: {
             for (int y = 0; y < library.size(); y++) {
                 for (int z = 0; z < library.get(y).size(); z++) {
 
-                    if (lattice == pairCount) {
+                    if (lattice == (pairCount + initialSeq.size())) {
                         display = new Display(library.get(y).get(z), RNA);
 
                         for (int h = 0; h < display.getLineArray().size(); h++) {
 
-                            display.getLineArray().get(h).draw();
+
+                            if (green) {
+                                display.getLineArray().get(h).setColor(new Color(0, 255, 0));
+                                display.getLineArray().get(h).draw();
+
+                                green = false;
+                            }
+                            else{
+                                display.getLineArray().get(h).setColor(new Color(255, 0, 0));
+                                display.getLineArray().get(h).draw();
+
+                                green = true;
+                            }
                         }
 
                         break search;
