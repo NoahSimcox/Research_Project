@@ -1,0 +1,66 @@
+Index: src/main/java/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import graphics.graphics.Line;\r\n\r\nimport java.util.Scanner;\r\nimport java.util.ArrayList;\r\n\r\n\r\nclass Main {\r\n    public static ArrayList<String[]> strings = new ArrayList<>();\r\n\r\n\r\n    public static void main(String[] args) {\r\n\r\n        Scanner scan = new Scanner(System.in);\r\n\r\n        System.out.println(\"Enter RNA sequence:\");\r\n        String RNA_input = scan.nextLine();\r\n\r\n        RNA_sequence RNA = new RNA_sequence(RNA_input);\r\n\r\n        System.out.println(RNA);\r\n\r\n        Array initialSeq = new Array();\r\n        Array2 library = new Array2();\r\n\r\n        for (int i = 0; i < RNA.size() - 1; i++){\r\n            Nucleotide pair_one = new Nucleotide(i);\r\n            for (int j = i + 1; j < RNA.size(); j++){\r\n                Nucleotide pair_two = new Nucleotide(j);\r\n                if (Pair.pair(RNA, pair_one, pair_two) == true){\r\n                    Pair match = new Pair(pair_one, pair_two);\r\n                    initialSeq.add_pair(match);\r\n\r\n                }\r\n\r\n            }\r\n\r\n        }\r\n        System.out.println(initialSeq.toString());\r\n\r\n        library.add_row();\r\n        int count = 0;\r\n        for (int a = 0; a < initialSeq.size()-1; a++){\r\n            for (int b = a + 1; b < initialSeq.size(); b++){\r\n                if (Rules.crossing(initialSeq.get(a), initialSeq.get(b))){\r\n                    library.add_pairList(new ArrayList<Pair>());\r\n                    library.get(0).get(count).add(initialSeq.get(a));\r\n                    library.get(0).get(count).add(initialSeq.get(b));\r\n                    count++;\r\n                }\r\n\r\n\r\n            }\r\n\r\n        }\r\n\r\n\r\n        library.add_row();\r\n        for (int a = 0; a < library.get(library.size()-2).size(); a++){\r\n            count = 0;\r\n            for (int e = 0; e < initialSeq.size(); e++){\r\n                for (int b = 0; b < library.get(library.size()-2).size(); b++){\r\n                    int count2 = 0;\r\n                    for (int c = 0; c < library.get(library.size()-2).get(b).size(); c++){\r\n                        if (Rules.crossing(library.get(library.size()-2).get(b).get(c), initialSeq.get(e))){\r\n                            count2++;\r\n                            if(count2 == library.get(library.size()-2).get(b).size()){\r\n                                library.add_pairList(new ArrayList<Pair>());\r\n                                library.get(library.size()-1).get(count).add(initialSeq.get(e));\r\n\r\n                                for (int d = 0; d < library.get(library.size()-2).get(b).size(); d++){\r\n                                    library.get(library.size()-1).get(count).add(library.get(library.size()-2).get(b).get(d));}\r\n\r\n                                if (library.get(library.size()-1).size() > 1){\r\n                                    for (int f = 0; f < library.get(library.size()-1).size()-1; f++){\r\n\r\n                                        if (Repeat.isRepeat(library.get(library.size()-1).get(library.get(library.size()-1).size()-1), library.get(library.size()-1).get(f))){\r\n                                            library.get(library.size()-1).remove(library.get(library.size()-1).get(library.get(library.size()-1).size()-1));\r\n                                            count--;\r\n                                        }\r\n\r\n\r\n                                    }\r\n                                }\r\n                                count++;\r\n                            }\r\n                        }\r\n\r\n\r\n                    }\r\n                }\r\n            }\r\n            library.add_row();\r\n        }\r\n        int sum = 0;\r\n        for (int num = 0; num < library.size(); num++){\r\n\r\n            sum += library.get(num).size();\r\n        }\r\n        System.out.println(\" Total possibilities = \"+ (1 + sum + initialSeq.size()));\r\n\r\n\r\n        Line line = new Line(1, 1, 100, 100);\r\n        line.draw();\r\n\r\n\r\n\r\n        System.out.println(\"Enter the number of the pair possibility:\");\r\n        int lattice = scan.nextInt();\r\n\r\n//        if (lattice <= initialSeq.size()-1)\r\n//            Display display = new Display(initialSeq.get(lattice));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Main.java b/src/main/java/Main.java
+--- a/src/main/java/Main.java	(revision 62939e197376b3b10416dd597b281fc1114593c0)
++++ b/src/main/java/Main.java	(date 1684258169347)
+@@ -99,13 +99,24 @@
+         System.out.println(" Total possibilities = "+ (1 + sum + initialSeq.size()));
+ 
+ 
+-        Line line = new Line(1, 1, 100, 100);
++        Line line = new Line(300, 400, 300, 300);
+         line.draw();
++        Line line1 = new Line(310, 300, 400, 300);
++        line1.draw();
++        Line line2 = new Line(410, 300, 410, 400);
++        line2.draw();
+ 
++        Line line3 = new Line(420, 400, 510, 400);
++        line3.draw();
++        Line line4 = new Line(520, 400, 610, 400);
++        line4.draw();
++        Line line5 = new Line(620, 400, 710, 400);
++        line5.draw();
+ 
+ 
+-        System.out.println("Enter the number of the pair possibility:");
+-        int lattice = scan.nextInt();
++
++//        System.out.println("Enter the number of the pair possibility:");
++//        int lattice = scan.nextInt();
+ 
+ //        if (lattice <= initialSeq.size()-1)
+ //            Display display = new Display(initialSeq.get(lattice));
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"28ef8c3c-4fb0-4631-bef2-adc3a6a75847\" name=\"Changes\" comment=\"Research Project\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/Display.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Main.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"importingSettings\">\r\n      <MavenImportingSettings>\r\n        <option name=\"workspaceImportEnabled\" value=\"true\" />\r\n      </MavenImportingSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2PqZFan7flYoA6HGM1H9GPWSifH\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"28ef8c3c-4fb0-4631-bef2-adc3a6a75847\" name=\"Changes\" comment=\"\" />\r\n      <created>1684186473703</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1684186473703</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Research Project\">\r\n      <created>1684186792257</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684186792257</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Research Project\">\r\n      <created>1684187088706</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684187088706</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Research Project\">\r\n      <created>1684187473491</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684187473491</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Research Project\">\r\n      <created>1684190065634</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684190065634</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"5\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Research Project\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Research Project\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/main/java/Nucleotide.java</url>\r\n          <line>16</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 62939e197376b3b10416dd597b281fc1114593c0)
++++ b/.idea/workspace.xml	(date 1684258169470)
+@@ -5,7 +5,6 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="28ef8c3c-4fb0-4631-bef2-adc3a6a75847" name="Changes" comment="Research Project">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/Display.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+     </list>
+@@ -44,7 +43,8 @@
+   "keyToString": {
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "last_opened_file_path": "C:/Users/student/Research_Project"
+   }
+ }]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

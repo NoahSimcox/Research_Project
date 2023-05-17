@@ -98,7 +98,7 @@ class Main {
             sum += library.get(num).size();
         }
 
-        System.out.println(library.toString());
+        System.out.println(library);
 
         System.out.println("Total possibilities = "+ (1 + sum + initialSeq.size()));
 
