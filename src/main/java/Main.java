@@ -108,28 +108,40 @@ class Main {
 
         Display display;
 
-        if (lattice <= initialSeq.size())
+        if (lattice <= initialSeq.size()) {
+
             display = new Display(initialSeq.get(lattice - 1), RNA);
 
-        else if (lattice > initialSeq.size()){
+            for (int h = 0; h < display.getLineArray().size(); h++) {
 
-            int pairCount = 0;
-
-            for (int y = 0; y < library.size(); y++){
-                for (int z = 0; z < library.get(y).size(); z++){
-
-                    if (lattice == pairCount)
-                        display = new Display(library.get(y).get(z), RNA);
-
-                    pairCount++;
-                }
+                display.getLineArray().get(h).draw();
             }
         }
 
 
-        for (int h = 0; h < display.getLineArray().size(); h++){
+        else {
 
-            display.getLineArray().get(h).draw();
+            int pairCount = 0;
+
+        search: {
+            for (int y = 0; y < library.size(); y++) {
+                for (int z = 0; z < library.get(y).size(); z++) {
+
+                    if (lattice == pairCount) {
+                        display = new Display(library.get(y).get(z), RNA);
+
+                        for (int h = 0; h < display.getLineArray().size(); h++) {
+
+                            display.getLineArray().get(h).draw();
+                        }
+
+                        break search;
+                        }
+
+                    pairCount++;
+                    }
+                }
+            }
         }
     }
 }
