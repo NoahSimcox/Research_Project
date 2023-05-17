@@ -6,9 +6,9 @@ public class Display {
 
     private Line line;
 
-    private final int startX = 200;
+    private final int startX = 100;
 
-    private final int startY = 400;
+    private final int startY = 800;
 
     private int endX = 0;
 
