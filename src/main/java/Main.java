@@ -99,7 +99,7 @@ class Main {
 
         System.out.println(library.toString());
 
-        System.out.println(" Total possibilities = "+ (1 + sum + initialSeq.size()));
+        System.out.println("Total possibilities = "+ (1 + sum + initialSeq.size()));
 
 
 

@@ -10,9 +10,9 @@ public class Display {
 
     private final int startY = 400;
 
-    private int endX;
+    private int endX = 0;
 
-    private int endY;
+    private int endY = 0;
 
     private ArrayList<String> seqArray;
 
