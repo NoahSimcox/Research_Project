@@ -96,18 +96,47 @@ class Main {
 
             sum += library.get(num).size();
         }
+
+        System.out.println(library.toString());
+
         System.out.println(" Total possibilities = "+ (1 + sum + initialSeq.size()));
 
 
-        Line line = new Line(1, 1, 100, 100);
-        line.draw();
 
-
-
-        System.out.println("Enter the number of the pair possibility:");
+        System.out.println("Enter a fold possibility:");
         int lattice = scan.nextInt();
 
-//        if (lattice <= initialSeq.size()-1)
-//            Display display = new Display(initialSeq.get(lattice));
+        Display display;
+
+        if (lattice <= initialSeq.size())
+            display = new Display(initialSeq.get(lattice - 1), RNA);
+
+        else if (lattice > initialSeq.size()){
+
+            int pairCount = 0;
+
+            for (int y = 0; y < library.size(); y++){
+                for (int z = 0; z < library.get(y).size(); z++){
+
+                    if (lattice == pairCount)
+                        display = new Display(library.get(y).get(z), RNA);
+
+                    pairCount++;
+                }
+            }
+        }
+
+
+        for (int h = 0; h < display.getLineArray().size(); h++){
+
+            display.getLineArray().get(h).draw();
+        }
     }
 }
+
+
+
+
+
+
+
